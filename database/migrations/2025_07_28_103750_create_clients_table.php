@@ -14,6 +14,9 @@ return new class extends Migration
             $table->string('nom_client');
             $table->string('prenom_client');
             $table->string('telephone')->nullable(); 
+            $table->string('secteur')->nullable(); 
+            $table->string('email')->unique()->nullable(); 
+             $table->string('statut')->default('Actif'); 
             $table->timestamps();  // ( pour dek : created_at et updated_at )
         });
     }

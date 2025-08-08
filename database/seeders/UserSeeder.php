@@ -10,24 +10,24 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Créer un Admin
         DB::table('users')->insert([
             'nom' => 'Admin',
             'prenom' => 'Super',
+            'email' => 'admin@example.com',
             'identifiant_connexion' => 'admin',
-            'password' => Hash::make('password'), // Mot de passe: "password"
-            'role' => 'Admin',
+            'password' => Hash::make('password'),
+            'role' => 'Admin', 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
-        // Créer un Régisseur
+        
         DB::table('users')->insert([
             'nom' => 'Dupont',
             'prenom' => 'Jean',
+            'email' => 'regisseur@example.com',
             'identifiant_connexion' => 'regisseur',
-            'password' => Hash::make('password'), // Mot de passe: "password"
-            'role' => 'Regisseur',
+            'password' => Hash::make('password'),
+            'role' => 'Régisseur', 
             'created_at' => now(),
             'updated_at' => now(),
         ]);

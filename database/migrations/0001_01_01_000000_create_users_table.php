@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id(); // id_utilisateur (PK)
             $table->string('nom');
             $table->string('prenom'); 
-            $table->string('identifiant_connexion')->unique(); 
-            $table->timestamp('email_verified_at')->nullable(); // On peut le laisser ou le supprimer
+            $table->string('email')->unique(); // <-- RG3NAH
+            $table->string('identifiant_connexion')->unique()->nullable(); // <-- N'ZIDOH ILA BGHINA NBQAW NSTA3MLOH
             $table->string('password'); // mot_de_passe_hache
-            $table->string('role'); // AJOUT (Admin, Régisseur...)
+            $table->string('role')->default('Regisseur'); // AJOUT (Admin, Régisseur...)
             $table->rememberToken();
             $table->timestamps();
         });

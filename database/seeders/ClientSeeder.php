@@ -15,6 +15,9 @@ class ClientSeeder extends Seeder
                 'nom_client' => 'Alami',
                 'prenom_client' => 'Mohammed',
                 'telephone' => '0661123456',
+                'secteur' => 'Centre', 
+                'email' => 'ahmed.benali@example.com',
+                'statut' => 'Actif',
                 'created_at' => now(), 'updated_at' => now(),
             ],
             [
@@ -22,6 +25,9 @@ class ClientSeeder extends Seeder
                 'nom_client' => 'Berrada',
                 'prenom_client' => 'Fatima',
                 'telephone' => '0662234567',
+                'secteur' => 'Nord', 
+                'email' => 'berrada.fati@example.com',
+                'statut' => 'Actif',
                 'created_at' => now(), 'updated_at' => now(),
             ],
             [
@@ -29,6 +35,9 @@ class ClientSeeder extends Seeder
                 'nom_client' => 'Cherkaoui',
                 'prenom_client' => 'Youssef',
                 'telephone' => '0663345678',
+                'secteur' => 'Sud', 
+                'email' => 'cherkaoui.youss@example.com',
+                'statut' => 'Actif',
                 'created_at' => now(), 'updated_at' => now(),
             ],
         ]);

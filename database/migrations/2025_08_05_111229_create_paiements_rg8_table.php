@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,19 +7,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('paiements', function (Blueprint $table) {
-            $table->id(); // id_paiement_rg8 (PK)
+        Schema::create('paiements_rg8', function (Blueprint $table) {
+            $table->id();
             $table->string('numero_rg8')->unique();
-            $table->decimal('montant_paye', 10, 2);
-            $table->decimal('penalite_retard', 10, 2)->default(0);
+            $table->string('numero_recu')->nullable();
+            $table->string('methode_reglement')->nullable();
+            $table->decimal('montant_paye');
+            $table->decimal('penalite_retard')->default(0);
             $table->dateTime('date_paiement');
-            $table->string('motif_annulation')->nullable(); // nullable() = tqder tkon khawya
-
-            // Les clés étrangères (FKs)
-            $table->foreignId('bordereau_rg12_id')->constrained('bordereaux_rg12');
+            $table->string('motif_annulation')->nullable();
+            $table->foreignId('bordereau_rg12_id')->nullable()->constrained('bordereaux_rg12');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('facture_id')->constrained('factures');
-
             $table->timestamps();
         });
     }
