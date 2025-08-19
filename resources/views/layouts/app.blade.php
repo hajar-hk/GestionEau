@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'ORMVAM Recouvrement')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-gray-100 font-sans">
 
     <div class="flex h-screen bg-gray-100">
@@ -32,56 +33,73 @@
                 </div>
 
                 {{-- Liens de navigation --}}
-<nav class="flex-1 px-2 py-4">
-    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
-        <i class="fas fa-tachometer-alt fa-fw mr-3"></i>Dashboard
-    </a>
-    
-    {{-- MENU ADMINISTRATEUR --}}
-    @can('manage-users')
-        <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase">Administration</p>
-        <a href="{{ route('users.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-users-cog fa-fw mr-3"></i>Gérer les Utilisateurs
-        </a>
-    @endcan
+                <nav class="flex-1 px-2 py-4">
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <i class="fas fa-tachometer-alt fa-fw mr-3"></i>Dashboard
+                    </a>
 
-    {{-- MENU RÉGISSEUR --}}
-    {{-- On vérifie si l'utilisateur est un Régisseur OU un Admin (l'admin peut tout voir) --}}
-    @if(Auth::user()->role === 'Régisseur' || Auth::user()->role === 'Admin')
-        <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase">Opérations</p>
-        
-        {{-- Enregistrer un Paiement (RG8) --}}
-        <a href="{{ route('rg8.create') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-credit-card fa-fw mr-3"></i>Enregistrer un Paiement
-        </a>
+                    {{-- MENU ADMINISTRATEUR --}}
+                    @can('manage-users')
+                        <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                            Administration</p>
 
-        {{-- Gérer les Factures --}}
-        <a href="{{ route('factures.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-file-invoice fa-fw mr-3"></i>Gérer les Factures
-        </a>
-        
-        {{-- Gérer les Clients --}}
-        <a href="{{ route('clients.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-user-friends fa-fw mr-3"></i>Gérer les Clients
-        </a>
-        
-        {{-- Générer RG12 --}}
-        <a href="{{ route('rg12.create') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-file-alt fa-fw mr-3"></i>Générer RG12
-        </a>
-        
-        {{-- Générer la Déclaration --}}
-        <a href="{{ route('declarations.create') }}" class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
-            <i class="fas fa-chart-bar fa-fw mr-3"></i>Générer la Déclaration
-        </a>
-    @endif
-</nav>
+                        <a href="{{ route('users.index') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-users-cog fa-fw mr-3"></i>Gérer les Utilisateurs
+                        </a>
+
+                        <a href="{{ route('paiements.index') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-edit fa-fw mr-3"></i>Modifier / Annuler RG8
+                        </a>
+                    @endcan
+
+
+
+                    {{-- MENU RÉGISSEUR --}}
+                    {{-- On vérifie si l'utilisateur est un Régisseur OU un Admin (l'admin peut tout voir) --}}
+                    @if (Auth::user()->role === 'Régisseur')
+                        <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase">Opérations</p>
+
+                        {{-- Enregistrer un Paiement (RG8) --}}
+                        <a href="{{ route('rg8.create') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-credit-card fa-fw mr-3"></i>Enregistrer un Paiement
+                        </a>
+
+                        {{-- Gérer les Factures --}}
+                        <a href="{{ route('factures.index') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-file-invoice fa-fw mr-3"></i>Gérer les Factures
+                        </a>
+
+                        {{-- Gérer les Clients --}}
+                        <a href="{{ route('clients.index') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-user-friends fa-fw mr-3"></i>Gérer les Clients
+                        </a>
+
+                        {{-- Générer RG12 --}}
+                        <a href="{{ route('rg12.create') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-file-alt fa-fw mr-3"></i>Générer RG12
+                        </a>
+
+                        {{-- Générer la Déclaration --}}
+                        <a href="{{ route('declarations.create') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-chart-bar fa-fw mr-3"></i>Générer la Déclaration
+                        </a>
+                    @endif
+                </nav>
 
                 {{-- Bouton de déconnexion --}}
                 <div class="p-4 border-t border-gray-700">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="w-full flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <button type="submit"
+                            class="w-full flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             <i class="fas fa-sign-out-alt fa-fw mr-3"></i>Déconnexion
                         </button>
                     </form>
@@ -102,4 +120,5 @@
     {{-- Pour le JavaScript spécifique à chaque page --}}
     @stack('scripts')
 </body>
+
 </html>

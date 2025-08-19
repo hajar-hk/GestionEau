@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,10 @@ return new class extends Migration
             $table->string('numero_recu')->nullable();
             $table->string('methode_reglement')->nullable();
             $table->decimal('montant_paye');
-            $table->decimal('penalite_retard')->default(0);
+            $table->decimal('penalite_retard', 10, 2)->default(0);
             $table->dateTime('date_paiement');
             $table->string('motif_annulation')->nullable();
+            $table->string('statut')->default('Actif');
             $table->foreignId('bordereau_rg12_id')->nullable()->constrained('bordereaux_rg12');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('facture_id')->constrained('factures');

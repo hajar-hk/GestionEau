@@ -15,8 +15,7 @@ return new class extends Migration
             $table->decimal('montant_total', 10, 2);
 
             // La clé étrangère (FK) vers la table declarations
-            $table->foreignId('declaration_id')->constrained('declarations');
-
+            $table->foreignId('declaration_id')->nullable()->constrained('declarations');
             $table->timestamps();
         });
     }

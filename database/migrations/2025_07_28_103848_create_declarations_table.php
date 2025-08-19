@@ -9,10 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('declarations', function (Blueprint $table) {
-            $table->id(); // id_declaration (PK)
+            $table->id();
             $table->string('numero_declaration')->unique();
+            $table->string('periode');
+            $table->decimal('montant_global', 15, 2);
             $table->date('date_declaration');
-            $table->decimal('montant_global'); 
+            $table->enum('statut', ['Soumise', 'Validée'])->default('Soumise');
             $table->timestamps();
         });
     }

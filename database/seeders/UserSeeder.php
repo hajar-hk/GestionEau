@@ -16,18 +16,18 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'identifiant_connexion' => 'admin',
             'password' => Hash::make('password'),
-            'role' => 'Admin', 
+            'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+
         DB::table('users')->insert([
             'nom' => 'Dupont',
             'prenom' => 'Jean',
             'email' => 'regisseur@example.com',
             'identifiant_connexion' => 'regisseur',
             'password' => Hash::make('password'),
-            'role' => 'Régisseur', 
+            'role' => 'Régisseur',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

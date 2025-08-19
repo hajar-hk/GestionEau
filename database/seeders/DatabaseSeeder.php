@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ClientSeeder::class,
             FactureSeeder::class,
+            //PaiementRG8Seeder::class,
+            // BordereauRg12Seeder::class,
+            // DeclarationSeeder::class,
         ]);
     }
 }

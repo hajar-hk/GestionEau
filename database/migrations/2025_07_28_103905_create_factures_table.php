@@ -14,7 +14,8 @@ return new class extends Migration
             $table->decimal('montants');
             $table->date('date_emission');
             $table->date('date_echeance');
-            $table->string('statut'); // Ex: 'Payée', 'Non Payée'
+            $table->string('semestre')->nullable(); // Ex: 'Payée', 'Non Payée'
+            $table->enum('statut', ['Payée', 'En attente', 'En retard', 'Annulée'])->default('En attente');
 
             // La clé étrangère (FK) vers la table clients
             $table->foreignId('client_id')->constrained('clients');
