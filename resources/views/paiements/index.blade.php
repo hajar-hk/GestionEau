@@ -43,12 +43,7 @@
         </div>
     </div>
 
-    {{-- Bannière d'attention --}}
-    <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-8" role="alert">
-        <p class="font-bold">Attention</p>
-        <p>Toute modification ou annulation d'un RG8 doit être justifiée et sera tracée dans le système. Ces actions sont
-            réservées aux administrateurs.</p>
-    </div>
+
 
     {{-- Section principale --}}
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl">

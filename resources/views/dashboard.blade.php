@@ -53,45 +53,28 @@
         </div>
 
         {{-- Colonne de droite: Activités Récentes --}}
-        <div class="lg:col-span-2">
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">Activités récentes</h2>
-                <div class="space-y-4">
-                    {{-- On va laisser cette partie statique pour le moment --}}
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"><i
-                                class="fas fa-check text-green-500"></i></div>
-                        <div class="ml-4">
-                            <p>Paiement enregistré</p>
-                            <p class="text-sm text-gray-500">Il y a 5 minutes</p>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Activités récentes</h2>
+            <div class="space-y-4">
+                @forelse ($recentActivities as $activity)
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-4">
+                            {{-- On peut ajouter des icônes selon le type d'activité --}}
+                            <i class="fas fa-history text-gray-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm">{{ $activity->description }}</p>
+                            <p class="text-xs text-gray-500">
+                                Par {{ $activity->user->prenom ?? 'Système' }} -
+                                {{ $activity->created_at->diffForHumans() }} {{-- ex: "il y a 5 minutes" --}}
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"><i
-                                class="fas fa-file-invoice text-blue-500"></i></div>
-                        <div class="ml-4">
-                            <p>Facture générée</p>
-                            <p class="text-sm text-gray-500">Il y a 15 minutes</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"><i
-                                class="fas fa-user-plus text-green-500"></i></div>
-                        <div class="ml-4">
-                            <p>Client ajouté</p>
-                            <p class="text-sm text-gray-500">Il y a 1 heure</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center"><i
-                                class="fas fa-exclamation-triangle text-orange-500"></i></div>
-                        <div class="ml-4">
-                            <p>Retard de paiement</p>
-                            <p class="text-sm text-gray-500">Il y a 2 heures</p>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p class="text-center text-gray-400 py-8">Aucune activité récente.</p>
+                @endforelse
             </div>
         </div>
+
     </div>
 @endsection

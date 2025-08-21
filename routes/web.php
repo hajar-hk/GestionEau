@@ -11,6 +11,7 @@ use App\Http\Controllers\Rg12Controller;
 use App\Http\Controllers\DeclarationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\StatistiqueController;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class)->middleware('can:manage-users');
     // Route pour la gestion des paiements (Admin seulement)
     Route::resource('paiements', PaiementController::class)->middleware('can:manage-users');
+    // Route pour les statistiques (Admin seulement)
+    Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index')->middleware('can:manage-users');
 
     // Gérer les Factures
     Route::resource('factures', FactureController::class);

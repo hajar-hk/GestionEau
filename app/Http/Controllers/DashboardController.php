@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // ZID HADA
+use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use App\Models\Facture;
 use App\Models\PaiementRG8;
@@ -15,6 +15,9 @@ class DashboardController extends Controller
     {
         // On vérifie le rôle de l'utilisateur connecté
         $user = Auth::user();
+
+        // On récupère les 5 dernières activités globales
+        $recentActivities = \App\Models\Activity::with('user')->latest()->take(5)->get();
 
         if ($user->role === 'Admin') {
             // Si c'est un Admin, on prépare les données pour le dashboard Admin
@@ -38,6 +41,7 @@ class DashboardController extends Controller
                 'tauxRecouvrement' => round($tauxRecouvrement),
                 'creancesEnCours' => $creancesEnCours,
                 'retardsDePaiement' => $retardsDePaiement,
+                'recentActivities' => $recentActivities,
             ]);
         } else {
             // Si c'est un Régisseur (ou autre), on prépare les données pour son dashboard
@@ -57,6 +61,7 @@ class DashboardController extends Controller
                 'facturesEnAttente' => $facturesEnAttente,
                 'clientsActifs' => $clientsActifs,
                 'recouvrementMensuel' => $recouvrementMensuel,
+                'recentActivities' => $recentActivities,
             ]);
         }
     }

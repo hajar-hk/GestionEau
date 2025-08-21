@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+
 class Rg8Controller extends Controller
 {
     /**
@@ -93,7 +94,7 @@ class Rg8Controller extends Controller
 
                 $facture = Facture::find($factureId);
                 if ($facture) {
-                    PaiementRG8::create([
+                    $paiement = PaiementRG8::create([
                         'numero_rg8' => $numeroRg8,
                         'numero_recu' => $validatedData['numero_recu'],
                         'methode_reglement' => $validatedData['methode_reglement'],
@@ -103,6 +104,12 @@ class Rg8Controller extends Controller
                         'user_id' => Auth::id(),
                         'facture_id' => $facture->id,
                         'statut' => 'Actif',
+                    ]);
+
+                    \App\Models\Activity::create([
+                        'user_id' => Auth::id(), // Le régisseur qui a fait l'action
+                        'action' => 'payment_created',
+                        'description' => "Le paiement {$paiement->numero_rg8} pour le client {$facture->client->code_client} a été enregistré."
                     ]);
                     $facture->statut = 'Payée';
                     $facture->save();

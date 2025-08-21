@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -35,13 +37,19 @@ class UserController extends Controller
             'identifiant_connexion' => ['required', 'string', 'unique:users,identifiant_connexion'],
         ]);
 
-        User::create([
+        $user = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'identifiant_connexion' => $request->identifiant_connexion,
+        ]);
+
+        \App\Models\Activity::create([
+            'user_id' => Auth::id(), // L'admin qui a fait l'action
+            'action' => 'user_added',
+            'description' => "L'utilisateur {$user->prenom} {$user->nom} a été ajouté."
         ]);
 
         return redirect()->route('users.index')->with('success', 'Utilisateur créé avec succès!');

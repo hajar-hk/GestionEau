@@ -53,6 +53,11 @@
                             class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             <i class="fas fa-edit fa-fw mr-3"></i>Modifier / Annuler RG8
                         </a>
+
+                        <a href="{{ route('statistiques.index') }}"
+                            class="flex items-center px-4 py-2 mt-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-chart-line fa-fw mr-3"></i>Statistiques de Paiement
+                        </a>
                     @endcan
 
 
@@ -119,6 +124,8 @@
 
     {{-- Pour le JavaScript spécifique à chaque page --}}
     @stack('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </body>
 
 </html>
