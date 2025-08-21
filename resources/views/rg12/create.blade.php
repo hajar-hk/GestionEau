@@ -65,6 +65,11 @@
                                 <div class="text-right">
                                     <p class="font-bold text-green-600">
                                         {{ number_format($rg12->montant_total, 2, ',', ' ') }} MAD</p>
+
+                                    <a href="{{ route('rg12.print', $rg12) }}" target="_blank"
+                                        class="text-gray-400 hover:text-gray-800">
+                                        <i class="fas fa-download"></i>
+                                    </a>
                                 </div>
                             </div>
                         @empty

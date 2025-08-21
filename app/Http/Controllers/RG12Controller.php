@@ -6,6 +6,7 @@ use App\Models\BordereauRg12;
 use App\Models\PaiementRG8;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RG12Controller extends Controller
 {
@@ -71,5 +72,17 @@ class RG12Controller extends Controller
             DB::rollBack();
             return back()->with('error', 'Erreur critique: ' . $e->getMessage())->withInput();
         }
+    }
+
+    public function print(BordereauRg12 $bordereau)
+    {
+        // On charge les relations pour avoir les paiements et leurs détails
+        $bordereau->load(['paiements.facture.client', 'paiements.user']);
+
+        // On passe les données à une nouvelle vue PDF
+        $pdf = PDF::loadView('rg12.pdf', compact('bordereau'));
+
+        // On affiche le PDF dans le navigateur
+        return $pdf->stream('rg12-' . $bordereau->numero_rg12 . '.pdf');
     }
 }

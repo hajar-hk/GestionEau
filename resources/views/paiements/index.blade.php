@@ -49,7 +49,6 @@
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl">
         <div class="p-6 bg-white">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Rechercher un RG8</h2>
-            {{-- (Filtres à développer plus tard) --}}
             <hr class="my-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Enregistrements RG8</h2>
             <div class="overflow-x-auto">
@@ -105,6 +104,10 @@
                                     <a href="{{ route('paiements.edit', $paiement) }}"
                                         class="text-gray-400 hover:text-indigo-600 p-2"><i
                                             class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('paiements.print', $paiement) }}" target="_blank"
+                                        class="text-gray-400 hover:text-gray-800 p-2">
+                                        <i class="fas fa-print"></i>
+                                    </a>
                                     <form action="{{ route('paiements.destroy', $paiement) }}" method="POST"
                                         class="inline"
                                         onsubmit="return confirm('Êtes-vous sûr de vouloir annuler ce paiement ? Cette action est irréversible.');">

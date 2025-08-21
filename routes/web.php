@@ -36,8 +36,11 @@ Route::middleware('auth')->group(function () {
 
     // Gérer les Régisseur ( pour l'amdin) 
     Route::resource('users', UserController::class)->middleware('can:manage-users');
+
     // Route pour la gestion des paiements (Admin seulement)
     Route::resource('paiements', PaiementController::class)->middleware('can:manage-users');
+    Route::get('/paiements/{paiement}/print', [App\Http\Controllers\PaiementController::class, 'print'])->name('paiements.print');
+
     // Route pour les statistiques (Admin seulement)
     Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index')->middleware('can:manage-users');
 
@@ -51,6 +54,7 @@ Route::middleware('auth')->group(function () {
     // Générer RG12
     Route::get('/rg12/generer', [Rg12Controller::class, 'create'])->name('rg12.create'); // get bech afficher lina la page
     Route::post('/rg12', [Rg12Controller::class, 'store'])->name('rg12.store'); //Ghadi t'steqbel les paiements l'm'selectiyin o t'créé l'RG12.
+    Route::get('/rg12/{bordereau}/print', [RG12Controller::class, 'print'])->name('rg12.print');
 
     // Générer la Déclaration
     Route::resource('declarations', DeclarationController::class);

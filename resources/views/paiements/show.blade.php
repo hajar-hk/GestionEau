@@ -5,6 +5,10 @@
 @section('content')
 
     <div class="max-w-4xl mx-auto">
+        <a href="{{ route('paiements.print', $paiement) }}" target="_blank"
+            class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            <i class="fas fa-print mr-2"></i>Imprimer le Reçu
+        </a>
 
         <div class="bg-white p-6 rounded-xl shadow-sm">
             {{-- Header de la page --}}

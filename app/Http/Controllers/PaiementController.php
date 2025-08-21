@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PaiementRG8;
 use App\Models\Facture;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaiementController extends Controller
 {
@@ -30,6 +31,18 @@ class PaiementController extends Controller
             'modifies',
             'annules'
         ));
+    }
+
+    public function print(PaiementRG8 $paiement)
+    {
+        // On charge les relations pour avoir toutes les infos
+        $paiement->load(['facture.client', 'user']);
+
+        // On passe les données à une nouvelle vue PDF
+        $pdf = PDF::loadView('paiements.pdf', compact('paiement'));
+
+        // On affiche le PDF dans le navigateur
+        return $pdf->stream('rg8-' . $paiement->numero_rg8 . '.pdf');
     }
 
     /**
