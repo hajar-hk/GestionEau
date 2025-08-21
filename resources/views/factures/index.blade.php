@@ -108,9 +108,19 @@
     {{-- Table --}}
     <div>
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-gray-800">Liste des factures</h2>
-            <p class="text-sm text-gray-500">{{ $totalFactures }} facture(s) trouvée(s)</p>
+            <div>
+                <h2 class="text-xl font-bold text-gray-800">Liste des factures</h2>
+                <p class="text-sm text-gray-500">{{ $factures->count() }} facture(s) trouvée(s)</p>
+            </div>
+
+            {{-- ######## BOUTON D'EXPORTATION ######## --}}
+            <a href="{{ route('factures.export') }}"
+                class="border px-3 py-2 rounded-md text-sm hover:bg-gray-50 flex items-center">
+                <i class="fas fa-download mr-2"></i>
+                Exporter
+            </a>
         </div>
+
 
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
@@ -163,8 +173,7 @@
                                     class="text-gray-400 hover:text-blue-600 p-2"><i class="fas fa-eye"></i></a>
                                 <a href="{{ route('factures.edit', $facture) }}"
                                     class="text-gray-400 hover:text-indigo-600 p-2"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="text-gray-400 hover:text-green-600 p-2"><i
-                                        class="fas fa-download"></i></a>
+
                             </td>
                         </tr>
                     @empty

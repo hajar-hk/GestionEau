@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index')->middleware('can:manage-users');
 
     // Gérer les Factures
+    Route::get('/factures/export', [FactureController::class, 'export'])->name('factures.export');
     Route::resource('factures', FactureController::class);
 
     // Gérer les Clients

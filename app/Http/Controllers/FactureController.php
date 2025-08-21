@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Facture;
 use App\Models\Client;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FacturesExport;
+
 
 class FactureController extends Controller
 {
@@ -64,7 +67,10 @@ class FactureController extends Controller
         ]);
     }
 
-
+    public function export()
+    {
+        return Excel::download(new FacturesExport, 'factures.xlsx');
+    }
 
 
     /**
