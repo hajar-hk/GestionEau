@@ -164,7 +164,6 @@
         </div>
     </div>
 
-    {{-- JAVASCRIPT --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const clientModal = document.getElementById('client-modal');

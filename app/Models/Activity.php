@@ -16,3 +16,7 @@ class Activity extends Model
         return $this->belongsTo(User::class);
     }
 }
+
+
+
+// note: $fillable est un mécanisme de sécurité essentiel dans Laravel qui te protège contre les vulnérabilités de type "Mass Assignment" en te forçant à déclarer explicitement quels champs peuvent être remplis automatiquement.

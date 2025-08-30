@@ -57,8 +57,6 @@
                                 <div>
                                     <p class="font-semibold text-gray-800">{{ $rg12->numero_rg12 }}</p>
                                     <p class="text-xs text-gray-500">
-                                        {{-- On a besoin de la relation pour compter --}}
-                                        {{-- {{ $rg12->paiements->count() }} RG8 - --}}
                                         {{ \Carbon\Carbon::parse($rg12->date_creation)->format('d/m/Y') }}
                                     </p>
                                 </div>

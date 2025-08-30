@@ -30,7 +30,7 @@ class FactureController extends Controller
             $query->where('semestre', $request->semestre);
         }
 
-        // 4. Filtre par barre de recherche (LA PARTIE LA PLUS IMPORTANTE)
+        // 4. Filtre par barre de recherche 
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -41,7 +41,7 @@ class FactureController extends Controller
                         $clientQuery->where('code_client', 'like', "%{$search}%")
                             ->orWhere('nom_client', 'like', "%{$search}%")
                             ->orWhere('prenom_client', 'like', "%{$search}%")
-                            // Bonus: Recherche sur le nom complet
+                            //Recherche sur le nom complet
                             ->orWhere(DB::raw("CONCAT(nom_client, ' ', prenom_client)"), 'like', "%{$search}%");
                     });
             });
@@ -50,7 +50,7 @@ class FactureController extends Controller
         // 5. On exécute la requête finale et on trie
         $factures = $query->latest()->get();
 
-        // Les statistiques globales (ne changent pas avec le filtre)
+        // Les statistiques globales 
         $totalFactures = Facture::count();
         $totalPayees = Facture::where('statut', 'Payée')->count();
         $totalEnAttente = Facture::where('statut', 'En attente')->count();
@@ -58,7 +58,7 @@ class FactureController extends Controller
         $montantTotal = Facture::sum('montants');
 
         return view('factures.index', [
-            'factures' => $factures, // On envoie les factures filtrées
+            'factures' => $factures,
             'totalFactures' => $totalFactures,
             'totalPayees' => $totalPayees,
             'totalEnAttente' => $totalEnAttente,
@@ -67,6 +67,7 @@ class FactureController extends Controller
         ]);
     }
 
+    // cette fct pour la fonctionnalité l'export de l'excel 
     public function export()
     {
         return Excel::download(new FacturesExport, 'factures.xlsx');
@@ -100,6 +101,7 @@ class FactureController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
     // AFFICHER LE FORMULAIRE DE MODIFICATION
     public function edit(Facture $facture)
     {
@@ -116,6 +118,7 @@ class FactureController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     // ENREGISTRER LA MODIFICATION
     public function update(Request $request, Facture $facture)
     {

@@ -70,7 +70,7 @@ class Rg8Controller extends Controller
 
 
 
-    // pour gette les donner mane navigat w ydkhlo base donnee
+    // pour getter les donner mane navigat w ydkhlo base donnee
     public function store(Request $request)
     {
         // 1. Validation (sans numero_rg8)
@@ -107,7 +107,7 @@ class Rg8Controller extends Controller
                     ]);
 
                     \App\Models\Activity::create([
-                        'user_id' => Auth::id(), // Le régisseur qui a fait l'action
+                        'user_id' => Auth::id(), // Le régisseur qui a fait l'action!!!!!
                         'action' => 'payment_created',
                         'description' => "Le paiement {$paiement->numero_rg8} pour le client {$facture->client->code_client} a été enregistré."
                     ]);

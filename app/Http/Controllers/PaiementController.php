@@ -33,6 +33,7 @@ class PaiementController extends Controller
         ));
     }
 
+    // c'est pour la gestion de la generation du pdf 
     public function print(PaiementRG8 $paiement)
     {
         // On charge les relations pour avoir toutes les infos
@@ -95,7 +96,6 @@ class PaiementController extends Controller
             'penalite_retard' => 'required|numeric',
             'date_paiement' => 'required|date',
             'statut' => 'required|string',
-            // ... (on peut ajouter les autres champs)
         ]);
 
         $paiement->update($validatedData);
@@ -114,8 +114,8 @@ class PaiementController extends Controller
     {
         // Au lieu de supprimer, on change le statut
         $paiement->statut = 'Annulé';
-        // On peut demander une raison d'annulation
-        // $paiement->motif_annulation = "Raison...";
+
+
         $paiement->save();
 
         // On doit aussi remettre le statut de la facture à "En attente"

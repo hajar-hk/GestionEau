@@ -21,7 +21,6 @@
     {{-- Header --}}
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800 flex items-center">
-            {{-- HADA HOWA L'ICÔNE L'JDID --}}
             <i class="fas fa-credit-card mr-3 text-purple-500"></i>
             Gestion des paiements d'irrigation
         </h1>

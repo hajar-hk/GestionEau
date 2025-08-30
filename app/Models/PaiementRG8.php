@@ -32,7 +32,6 @@ class PaiementRG8 extends Model
     }
 
 
-    // PS: On peut aussi ajouter les autres relations
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

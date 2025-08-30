@@ -113,7 +113,7 @@
                 <p class="text-sm text-gray-500">{{ $factures->count() }} facture(s) trouvée(s)</p>
             </div>
 
-            {{-- ######## BOUTON D'EXPORTATION ######## --}}
+            {{--  BOUTON D'EXPORTATION  --}}
             <a href="{{ route('factures.export') }}"
                 class="border px-3 py-2 rounded-md text-sm hover:bg-gray-50 flex items-center">
                 <i class="fas fa-download mr-2"></i>

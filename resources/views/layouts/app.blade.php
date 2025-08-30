@@ -63,7 +63,7 @@
 
 
                     {{-- MENU RÉGISSEUR --}}
-                    {{-- On vérifie si l'utilisateur est un Régisseur OU un Admin (l'admin peut tout voir) --}}
+                    {{-- On vérifie si l'utilisateur est un Régisseur OU un Admin --}}
                     @if (Auth::user()->role === 'Régisseur')
                         <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase">Opérations</p>
 
@@ -115,9 +115,9 @@
         <!-- Main content -->
         <div class="flex flex-col flex-1 overflow-y-auto">
             <main class="flex-1 p-4 sm:p-8">
-                {{-- ########## HNA FIN GHADI YJI L'CONTENU DYAL KOL PAGE ########## --}}
+                {{--  HNA FIN GHADI YJI L'CONTENU DYAL KOL PAGE LIBGHINA --}}
                 @yield('content')
-                {{-- ############################################################### --}}
+
             </main>
         </div>
     </div>

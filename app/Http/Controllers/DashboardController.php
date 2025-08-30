@@ -36,7 +36,7 @@ class DashboardController extends Controller
             // Retards de paiement (nombre de factures en retard)
             $retardsDePaiement = Facture::where('statut', 'En retard')->count();
 
-            return view('admin.dashboard', [ // On envoie à une nouvelle vue: admin.dashboard
+            return view('admin.dashboard', [
                 'revenusTotaux' => $revenusTotaux,
                 'tauxRecouvrement' => round($tauxRecouvrement),
                 'creancesEnCours' => $creancesEnCours,
@@ -44,7 +44,7 @@ class DashboardController extends Controller
                 'recentActivities' => $recentActivities,
             ]);
         } else {
-            // Si c'est un Régisseur (ou autre), on prépare les données pour son dashboard
+            // Si c'est un Régisseur , on prépare les données pour son dashboard
 
             $paiementsDuMois = PaiementRG8::where('user_id', $user->id) // Uniquement ses paiements
                 ->whereMonth('date_paiement', Carbon::now()->month)
@@ -56,7 +56,7 @@ class DashboardController extends Controller
                 ->whereMonth('date_paiement', Carbon::now()->month)
                 ->sum('montant_paye');
 
-            return view('dashboard', [ // On garde l'ancienne vue pour le régisseur
+            return view('dashboard', [
                 'paiementsDuMois' => $paiementsDuMois,
                 'facturesEnAttente' => $facturesEnAttente,
                 'clientsActifs' => $clientsActifs,

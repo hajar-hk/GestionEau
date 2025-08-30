@@ -9,14 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class DeclarationController extends Controller
 {
-    /**
-     * Affiche UNIQUEMENT la liste des déclarations (l'historique).
-     * On peut la laisser vide pour l'instant.
-     */
+
     public function index()
     {
-        // On peut la développer plus tard pour afficher un historique complet
-        // Pour l'instant, on redirige vers la page de création qui contient tout
         return redirect()->route('declarations.create');
     }
 

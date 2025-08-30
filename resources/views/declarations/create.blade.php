@@ -86,7 +86,6 @@
                         <tbody>
                             @forelse ($bordereauxDisponibles as $bordereau)
                                 <tr>
-                                    {{-- On ajoute form="declaration-form" pour lier le checkbox au formulaire --}}
                                     <td class="p-2"><input type="checkbox" form="declaration-form" name="bordereau_ids[]"
                                             value="{{ $bordereau->id }}" class="item-checkbox"
                                             data-montant="{{ $bordereau->montant_total }}"></td>

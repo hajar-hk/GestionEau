@@ -59,7 +59,6 @@
                 @forelse ($recentActivities as $activity)
                     <div class="flex items-start">
                         <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-4">
-                            {{-- On peut ajouter des icônes selon le type d'activité --}}
                             <i class="fas fa-history text-gray-500"></i>
                         </div>
                         <div>

@@ -11,21 +11,21 @@ class ClientController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $clients = Client::latest()->get();
+    {
+        $clients = Client::latest()->get();
 
-    // Calcul des statistiques
-    $totalClients = $clients->count();
-    $clientsActifs = $clients->where('statut', 'Actif')->count();
-    $clientsInactifs = $clients->where('statut', 'Inactif')->count();
+        // Calcul des statistiques
+        $totalClients = $clients->count();
+        $clientsActifs = $clients->where('statut', 'Actif')->count();
+        $clientsInactifs = $clients->where('statut', 'Inactif')->count();
 
-    return view('clients.index', [
-        'clients' => $clients,
-        'totalClients' => $totalClients,
-        'clientsActifs' => $clientsActifs,
-        'clientsInactifs' => $clientsInactifs,
-    ]);
-}
+        return view('clients.index', [
+            'clients' => $clients,
+            'totalClients' => $totalClients,
+            'clientsActifs' => $clientsActifs,
+            'clientsInactifs' => $clientsInactifs,
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -62,45 +62,44 @@ class ClientController extends Controller
      * Display the specified resource.
      */
     public function show(Client $client)
-{
-    return view('clients.show', ['client' => $client]);
-}
+    {
+        return view('clients.show', ['client' => $client]);
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Client $client)
-{
-    return response()->json($client);
-}
+    {
+        return response()->json($client);
+    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Client $client)
-{
-    $validatedData = $request->validate([
-        'code_client' => 'required|string|unique:clients,code_client,' . $client->id,
-        'nom_client' => 'required|string|max:255',
-        'prenom_client' => 'required|string|max:255',
-        'email' => 'required|email|unique:clients,email,' . $client->id,
-        'telephone' => 'nullable|string',
-        'secteur' => 'nullable|string',
-        'statut' => 'required|string',
-    ]);
-    
-    $client->update($validatedData);
+    {
+        $validatedData = $request->validate([
+            'code_client' => 'required|string|unique:clients,code_client,' . $client->id,
+            'nom_client' => 'required|string|max:255',
+            'prenom_client' => 'required|string|max:255',
+            'email' => 'required|email|unique:clients,email,' . $client->id,
+            'telephone' => 'nullable|string',
+            'secteur' => 'nullable|string',
+            'statut' => 'required|string',
+        ]);
 
-    return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès!');
-}
+        $client->update($validatedData);
+
+        return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès!');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Client $client)
-{
-    // On peut ajouter une vérification si le client a des factures
-    $client->delete();
-    return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès!');
-}
+    {
+        $client->delete();
+        return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès!');
+    }
 }

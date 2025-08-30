@@ -2,10 +2,12 @@
 
 namespace App\Exports;
 
+// c'est pour la gestion de la fonctionnalité d'excel
+
 use App\Models\Facture;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings; // Pour les en-têtes
-use Maatwebsite\Excel\Concerns\WithMapping;  // Pour formater les données
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
 class FacturesExport implements FromCollection, WithHeadings, WithMapping
 {

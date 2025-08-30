@@ -14,7 +14,7 @@ class StatistiqueController extends Controller
 {
     public function index(Request $request)
     {
-        // === 1. GESTION DES FILTRES DE DATE ===
+        //  1. GESTION DES FILTRES DE DATE
         $startDate = Carbon::createFromTimestamp(0);
         $endDate = now();
         $periodeSelectionnee = $request->get('periode', 'all');
@@ -34,11 +34,11 @@ class StatistiqueController extends Controller
             }
         }
 
-        // === 2. CRÉATION DES REQUÊTES DE BASE FILTRÉES ===
+        //  2. CRÉATION DES REQUÊTES DE BASE FILTRÉES 
         $paiementsQuery = PaiementRG8::whereBetween('date_paiement', [$startDate, $endDate]);
         $facturesQuery = Facture::whereBetween('created_at', [$startDate, $endDate]); // On filtre les factures par date de création
 
-        // === 3. CALCUL DES KPIs À PARTIR DES REQUÊTES FILTRÉES ===
+        // 3. CALCUL DES KPIs À PARTIR DES REQUÊTES FILTRÉES 
         $revenusTotaux = (clone $paiementsQuery)->sum(DB::raw('montant_paye + penalite_retard'));
         $totalFactures = (clone $facturesQuery)->count();
         $facturesPayees = (clone $facturesQuery)->where('statut', 'Payée')->count();
@@ -46,10 +46,10 @@ class StatistiqueController extends Controller
         $creancesEnCours = (clone $facturesQuery)->whereIn('statut', ['En attente', 'En retard'])->sum('montants');
         $retardsDePaiement = (clone $facturesQuery)->where('statut', 'En retard')->count();
 
-        // === NOUVEAU: On récupère la liste des secteurs pour le dropdown ===
+        //  On récupère la liste des secteurs pour le dropdown 
         $secteurs = Client::select('secteur')->whereNotNull('secteur')->distinct()->orderBy('secteur')->pluck('secteur');
 
-        // === On modifie les requêtes de base pour inclure le filtre secteur ===
+        // On modifie les requêtes de base pour inclure le filtre secteur hade mra
         $paiementsQuery = PaiementRG8::whereBetween('date_paiement', [$startDate, $endDate]);
         $facturesQuery = Facture::whereBetween('created_at', [$startDate, $endDate]);
 
@@ -64,7 +64,7 @@ class StatistiqueController extends Controller
             });
         }
 
-        // === 4. DONNÉES POUR LES GRAPHIQUES (FILTRÉES AUSSI) ===
+        // 4. DONNÉES POUR LES GRAPHIQUES 
 
         // --- Graphique 1: Revenus par Mois ---
         // Ce graphique doit TOUJOURS afficher les 12 derniers mois, il n'est pas affecté par le filtre
@@ -83,7 +83,7 @@ class StatistiqueController extends Controller
         $labelsSecteur = $revenusParSecteur->keys();
         $dataSecteur = $revenusParSecteur->values();
 
-        // === 5. ENVOI DE TOUTES LES DONNÉES À LA VUE ===
+        //  5. ENVOI DE TOUTES LES DONNÉES À LA VUE 
         return view('statistiques.index', compact(
             'revenusTotaux',
             'tauxRecouvrement',

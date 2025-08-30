@@ -27,7 +27,7 @@
                             <option value="this_year" @if (request('periode') == 'this_year') selected @endif>Cette année</option>
                         </select>
                     </div>
-                    {{-- ########## DROPDOWN JDID DYAL SECTEUR ########## --}}
+                    {{--  DROPDOWN DYAL SECTEUR  --}}
                     <div>
                         <label for="secteur" class="block text-sm font-medium text-gray-700">Secteur</label>
                         <select name="secteur" id="secteur"
@@ -40,7 +40,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- ############################################# --}}
                 </div>
 
                 {{-- La partie droite des boutons --}}
@@ -85,7 +84,7 @@
         {{-- Graphique 1: Bar Chart --}}
         <div class="bg-white p-6 rounded-xl shadow-sm">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Revenus par Mois</h2>
-            {{-- HNA FIN GHAYT'RSSEM L'GRAPHIQUE --}}
+            {{-- hna fen ghnrsmo graphique --}}
             <canvas id="revenusMoisChart"></canvas>
         </div>
         {{-- Graphique 2: Pie Chart --}}
